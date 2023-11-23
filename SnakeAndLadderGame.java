@@ -3,6 +3,10 @@ import java.util.Random;
 public class SnakeAndLadderGame {
 
     private int playerPosition;
+    private static final int WINNING_POSITION = 100;
+    private static final int NO_PLAY = 0;
+    private static final int LADDER = 1;
+    private static final int SNAKE = 2;
 
     // Use Case 1 : initialize position of player with 0.
     public SnakeAndLadderGame() {
@@ -13,6 +17,12 @@ public class SnakeAndLadderGame {
     private int rollDie() {
         Random random = new Random();
         return random.nextInt(6) + 1;
+    }
+
+    // Use Case 3: Check for Options (No Play, Ladder, Snake).
+    private int checkOption() {
+        Random random = new Random();
+        return random.nextInt(3);
     }
 
     public static void main(String[] args) {
