@@ -77,5 +77,9 @@ public class SnakeAndLadderGame {
         // Use Case 1: Snake and Ladder game played with a single player at start
         // position 0
         SnakeAndLadderGame game = new SnakeAndLadderGame();
+
+        // Use Case 6: Report the number of times the dice was played to win the game
+        int diceRolls = game.playGame();
+        System.out.println("Number of times the dice was played to win the game: " + diceRolls);
     }
 }
