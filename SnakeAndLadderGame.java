@@ -25,6 +25,51 @@ public class SnakeAndLadderGame {
         return random.nextInt(3);
     }
 
+    // Use case 4: we will play game until player reaches to 100, and if player
+    // reaches <0 position we will restart from 0.
+    private int playGame() {
+        int TotalRolls = 0;
+        int newPosition = playerPosition;
+        while (newPosition < WINNING_POSITION) {
+
+            // get unmber between 1 to 6
+            int dieRoll = rollDie();
+
+            // get option between 1 to 3
+            int option = checkOption();
+
+            // move player
+            switch (option) {
+                case NO_PLAY:
+                    // Do nothing, player stays in the same position
+                    break;
+                case LADDER:
+                    if (newPosition + dieRoll <= WINNING_POSITION) {
+                        newPosition += dieRoll;
+                    }
+                    break;
+                case SNAKE:
+                    newPosition -= dieRoll;
+                    if (newPosition < 0) {
+                        newPosition = 0;
+                    }
+                    break;
+            }
+
+            // Use Case 5: ensures that the winning position is exact 100 and not greater than 100.
+            if (newPosition <= WINNING_POSITION)
+                playerPosition = newPosition;
+
+            TotalRolls++;
+
+            // use case 6: printing the postion of player and total number of die roll after
+            // each die roll
+            System.out.println("Die Roll: " + dieRoll + ", Option: " + option + ", Position: " + playerPosition);
+        }
+
+        return TotalRolls;
+    }
+
     public static void main(String[] args) {
 
         System.out.println("Welcome to Snake and Ladder game!!");
