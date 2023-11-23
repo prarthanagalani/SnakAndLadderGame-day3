@@ -56,7 +56,8 @@ public class SnakeAndLadderGame {
                     break;
             }
 
-            // Use Case 5: ensures that the winning position is exact 100 and not greater than 100.
+            // Use Case 5: ensures that the winning position is exact 100 and not greater
+            // than 100.
             if (newPosition <= WINNING_POSITION)
                 playerPosition = newPosition;
 
@@ -70,6 +71,44 @@ public class SnakeAndLadderGame {
         return TotalRolls;
     }
 
+    // use case7: play game with 2 player
+    public static int playGameWithTwoPlayers() {
+
+        // get player1 and player2
+        SnakeAndLadderGame player1 = new SnakeAndLadderGame();
+        SnakeAndLadderGame player2 = new SnakeAndLadderGame();
+
+        int currentPlayer = 1;
+
+        // loop until any player reaches to end
+        while (player1.playerPosition < WINNING_POSITION && player2.playerPosition < WINNING_POSITION) {
+            SnakeAndLadderGame currentPlayerGame = (currentPlayer == 1) ? player1 : player2;
+
+            // get die number(1 to 6) and option(1 to 3)
+            int dieRoll = currentPlayerGame.rollDie();
+            int option = currentPlayerGame.checkOption();
+
+            // move the postion of current player
+            currentPlayerGame.playGame();
+
+            // print the current position of current player
+            System.out.println("Player " + currentPlayer + ": Die Roll: " + dieRoll + ", Option: " + option +
+                    ", Position: " + currentPlayerGame.playerPosition);
+
+            // if option was ladder turn will not change
+            if (option != LADDER) {
+                // Switch to the other player if no ladder is obtained
+                currentPlayer = (currentPlayer == 1) ? 2 : 1;
+            }
+        }
+        // Determine the winner
+        if (player1.playerPosition >= WINNING_POSITION) {
+            return 1;
+        } else {
+            return 2;
+        }
+    }
+
     public static void main(String[] args) {
 
         System.out.println("Welcome to Snake and Ladder game!!");
@@ -81,5 +120,10 @@ public class SnakeAndLadderGame {
         // Use Case 6: Report the number of times the dice was played to win the game
         int diceRolls = game.playGame();
         System.out.println("Number of times the dice was played to win the game: " + diceRolls);
+
+        // Use Case 7: Play the game with 2 players and report the winner
+        int winner = playGameWithTwoPlayers();
+        System.out.println("Player " + winner + " wins!");
+
     }
 }
